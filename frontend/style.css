@@ -1,0 +1,184 @@
+/* General Styles */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: 'Roboto Mono', monospace;
+    background-color: #0a0e14;
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Space around container on desktop */
+    box-sizing: border-box;
+    overflow: hidden; 
+}
+
+.neon-blue {
+    color: #00ffff;
+    text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+}
+
+.container {
+    background-color: #1a222c;
+    border: 1px solid #00ffff;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 800px;
+    height: 90vh; /* Looks great on desktop */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+header {
+    background-color: #12181f;
+    padding: 15px 20px;
+    border-bottom: 1px solid #00ffff;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+}
+
+header h1 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.5em; /* Slightly reduced for better default fit */
+    margin: 0;
+    letter-spacing: 2px;
+    color: #e0e0e0;
+}
+
+header .tagline {
+    font-size: 0.8em;
+    color: #a0a0a0;
+    margin-top: 5px;
+}
+
+.chat-window {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    background-color: #0d1117;
+}
+
+/* Custom Scrollbar */
+.chat-window::-webkit-scrollbar {
+    width: 6px;
+}
+.chat-window::-webkit-scrollbar-track {
+    background: #1a222c;
+}
+.chat-window::-webkit-scrollbar-thumb {
+    background-color: #00ffff;
+    border-radius: 4px;
+}
+
+.message {
+    margin-bottom: 15px;
+    padding: 12px 15px;
+    border-radius: 6px;
+    max-width: 85%; /* Increased slightly for mobile room */
+    word-wrap: break-word;
+    line-height: 1.6;
+    font-size: 0.95em;
+    position: relative;
+}
+
+.message.user {
+    background-color: #2a3540;
+    margin-left: auto;
+    border-left: 3px solid #00ffff;
+    color: #f0f0f0;
+}
+
+.message.lila {
+    background-color: #1f2833;
+    margin-right: auto;
+    border-right: 3px solid #00ffff;
+    color: #e0e0e0;
+}
+
+/* Typewriter Cursor */
+.typewriter-active {
+    border-right: 0.1em solid #00ffff;
+    animation: blink-caret 0.75s step-end infinite;
+}
+
+.typewriter-done {
+    border-right: none;
+    animation: none;
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #00ffff; }
+}
+
+.input-area {
+    display: flex;
+    padding: 15px 20px;
+    border-top: 1px solid #00ffff;
+    background-color: #12181f;
+    gap: 10px; /* Space between input and button */
+}
+
+#user-input {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border: 1px solid #00ffff;
+    border-radius: 6px;
+    background-color: #0d1117;
+    color: #e0e0e0;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1em;
+    outline: none;
+}
+
+#send-btn {
+    background-color: #00ffff;
+    color: #0a0e14;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 15px;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7em; /* Smaller font to prevent button overflow */
+    transition: all 0.3s ease;
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 600px) {
+    body {
+        padding: 0; /* Remove body padding to use full screen */
+    }
+
+    .container {
+        height: 100vh; /* Fill entire mobile height */
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+    }
+
+    header h1 {
+        font-size: 1em; /* Smaller title for narrow screens */
+    }
+
+    .message {
+        max-width: 90%; /* Let messages use more width */
+        font-size: 0.9em;
+    }
+
+    .input-area {
+        padding: 10px;
+    }
+
+    #send-btn {
+        padding: 10px;
+        font-size: 0.6em;
+    }
+}
