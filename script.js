@@ -20,38 +20,34 @@ async function sendMessage() {
     const messageText = userInput.value.trim();
     if (messageText === '') return;
 
+    // 1. Capture the history BEFORE adding the new message
+    const historyToSend = [...chatHistory]; 
+
+    // 2. Display the message on screen and update the local history for NEXT time
     appendMessage('user', messageText);
+    
     userInput.value = '';
-    userInput.disabled = true; 
+    userInput.disabled = true;
     sendBtn.disabled = true;
 
     try {
-        // Changed URL to relative path for Vercel deployment
         const response = await fetch('/chat', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
                 message: messageText, 
-                history: chatHistory 
+                history: historyToSend // Send the history from BEFORE this message
             }),
         });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
         const data = await response.json();
-        
-        // Update local history with the synchronized history from the backend
-        chatHistory = data.history; 
-        
-        appendMessage('lila', data.response, true); 
+        appendMessage('lila', data.response, true);
 
     } catch (error) {
-        console.error('Error sending message:', error);
-        appendMessage('lila', 'SYSTEM ERROR: Lila is offline. Connection failed: ' + error.message, true);
+        console.error('Error:', error);
+        appendMessage('lila', 'SYSTEM ERROR: Connection lost.');
     } finally {
         userInput.disabled = false;
         sendBtn.disabled = false;
