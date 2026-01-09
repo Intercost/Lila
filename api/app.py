@@ -92,6 +92,7 @@ async def chat_with_lila(request: ChatRequest):
 
     except Exception as e:
         print(f"Error in Lila chat: {e}")
+        print(f"TRACEBACK: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/")
