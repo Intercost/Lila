@@ -1,8 +1,7 @@
 {
+  "public": true,
   "rewrites": [
-    {
-      "source": "/chat",
-      "destination": "/api/app.py"
-    }
+    { "source": "/chat", "destination": "/api/app.py" },
+    { "source": "/(.*)", "destination": "/frontend/$1" }
   ]
 }
